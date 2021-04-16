@@ -68,9 +68,9 @@ await myTable.crud.updateOne(ctx, {
 // delete record by id => Promise<MyTable>
 await myTable.crud.deleteOne(ctx, 'some_id');
 
-// get all records
-await myTable.crud.list(ctx); // Promise<MyTable[]>
+// get all records => Promise<MyTable[]>
+await myTable.crud.list(ctx);
 
-// get all records, filter where title = hello
-await myTable.crud.list(ctx, { title: { eq: 'hello }); // Promise<MyTable[]>
+// get all records, filter where title = hello => Promise<MyTable[]>
+await myTable.crud.list(ctx, { title: { eq: 'hello });
 ```
