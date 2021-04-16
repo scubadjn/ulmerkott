@@ -21,7 +21,7 @@ const crud = crudFactory(settings({
 ```
 ## configure:
 ```ts
-// create an interface for the column
+// create an interface for the table
 interface MyTable {
   id: string;
   title: string;
