@@ -3,7 +3,7 @@ export default class DbError extends Error {
   constructor(namespace: string, adapter: string, message: string, err?: Error) {
     const msg = `${namespace}:${adapter}:${message}${err ? `:${err.message}` : ''}`;
     super(msg);
-    this.name = 'DbError';
+    this.name = 'ulmerkott';
     this.message = msg;
     this.adapter = adapter;
     Object.setPrototypeOf(this, DbError.prototype);
