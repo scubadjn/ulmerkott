@@ -47,7 +47,7 @@ const myTable = makeCrud<typeof config.c, MyTable, {
 ### use:
 ```ts
 // insert record => Promise<MyTable>
-await myTable.crud.insertOne(ctx, { Promise<MyTable>
+await myTable.crud.insertOne(ctx, {
   name: 'hello',
   someOtherColumn: 'world',
 });
