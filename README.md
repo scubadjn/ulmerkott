@@ -14,9 +14,9 @@ yarn add dataloader@^2.0.0 pg@^8.5.1
 import { crudFactory, settings, sql, SQLStringFilter, SQLBoolFilter } from 'ulmerkott/pg';
 
 const crud = crudFactory(settings({
-  namespace: 'scuba',
+  namespace: 'ulmerkott',
   createId: master.createID,
-  db: (ctx: Ctx) => ctx.pg.scuba as any,
+  db: (ctx: Ctx) => ctx.pg.somePgClient,
 }));
 ```
 ## configure:

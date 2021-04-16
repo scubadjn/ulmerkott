@@ -2,7 +2,7 @@ export { sql, SQLStringFilter, SQLBoolFilter } from './sql';
 export { factorySettings as settings } from '../index';
 import { WithFilterConfig } from './sqlCreateWithFilter';
 import { FactorySettingResult } from '../index';
-import { makeCrud } from './sql';
+import { pgEngine } from './sql';
 
 interface FactoryProps {
   listOptions?: WithFilterConfig;
@@ -16,9 +16,8 @@ export function crudFactory<C>(settings: FactorySettingResult<C>) {
   const { config } = settings;
   function build<Columns, DataObj, ListInput = undefined>(props: FactoryProps) {
     type Update = Partial<DataObj> & { id: string };
-    return  makeCrud<Columns, DataObj, Omit<DataObj, 'id'>, Update, ListInput, Partial<Omit<DataObj, 'id'>>>({
+    return  pgEngine<Columns, DataObj, Omit<DataObj, 'id'>, Update, ListInput, Partial<Omit<DataObj, 'id'>>>({
       config,
-      namespace: config.namespace,
       table: props.tableConfig.name,
       fieldMap: props.tableConfig.c,
       listOptions: props.listOptions,
