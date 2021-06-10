@@ -17,6 +17,34 @@ const query = makeQueries({
 });
 
 describe('sql query', () => {
+  test('insertOne', () => {
+    const res = query.insertOne({ title: 'hello world', myDescription: 'description' });
+    expect(res.values.length).toEqual(3);
+    expect(res.values[0].length);
+    expect(res.values[1]).toEqual('hello world');
+    expect(res.values[2]).toEqual('description');
+    expect(res.text).toEqual(`
+      INSERT into my_table (
+        id,title,my_description
+      ) VALUES ($1,$2,$3)
+      RETURNING
+        my_table.id,my_table.title,my_table.my_description AS "myDescription"
+      `);
+  });
+  test('insertOne - override id', () => {
+    const res = query.insertOne({ id: 'custom-id', title: 'hello world', myDescription: 'description' });
+    expect(res.values.length).toEqual(3);
+    expect(res.values[0]).toEqual('custom-id');
+    expect(res.values[1]).toEqual('hello world');
+    expect(res.values[2]).toEqual('description');
+    expect(res.text).toEqual(`
+      INSERT into my_table (
+        id,title,my_description
+      ) VALUES ($1,$2,$3)
+      RETURNING
+        my_table.id,my_table.title,my_table.my_description AS "myDescription"
+      `);
+  });
   test('findOne', () => {
     const res = query.findOne('idc');
     expect(res.values).toEqual(['idc']);

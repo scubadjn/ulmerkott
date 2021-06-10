@@ -59,8 +59,8 @@ export function makeQueries<Ctx = any>(props: Props<Ctx>) {
     return { text, values: r.args };
   }
   function insertOne<Create = any>(input: Create) {
-    const ins = parser.insert(input);
     const { id } = input as any;
+    const ins = parser.insert(input);
     return {
       text: sql`
       INSERT into ${table} (
