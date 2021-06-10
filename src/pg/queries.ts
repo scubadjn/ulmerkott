@@ -60,6 +60,7 @@ export function makeQueries<Ctx = any>(props: Props<Ctx>) {
   }
   function insertOne<Create = any>(input: Create) {
     const ins = parser.insert(input);
+    const { id } = input as any;
     return {
       text: sql`
       INSERT into ${table} (
@@ -69,7 +70,7 @@ export function makeQueries<Ctx = any>(props: Props<Ctx>) {
         ${parser.returnFieldsWithTable}
       `,
       values: [
-        config.createId(),
+        id ? id : config.createId(),
         ...ins.args,
       ],
     };

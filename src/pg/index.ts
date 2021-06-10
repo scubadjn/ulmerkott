@@ -16,7 +16,8 @@ export function crudFactory<C>(settings: FactorySettingResult<C>) {
   const { config } = settings;
   function build<Columns, DataObj, ListInput = undefined>(props: FactoryProps) {
     type Update = Partial<DataObj> & { id: string };
-    return  pgEngine<Columns, DataObj, Omit<DataObj, 'id'>, Update, ListInput, Partial<Omit<DataObj, 'id'>>>({
+    type Create = Omit<DataObj, 'id'> & { id?: string };
+    return  pgEngine<Columns, DataObj, Create, Update, ListInput, Partial<Omit<DataObj, 'id'>>>({
       config,
       table: props.tableConfig.name,
       fieldMap: props.tableConfig.c,
