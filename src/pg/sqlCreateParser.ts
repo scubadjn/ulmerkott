@@ -38,7 +38,8 @@ export default function sqlCreateParser(props: Props) {
     returnFieldsWithTable: `${props.table}.id,${withTable}`,
     returnFieldsObj: returnFieldObject,
     fieldWithTableObj: fieldObject,
-    insert: (input: any) => {
+    insert: (rawInput: any) => {
+      const input = {...rawInput};
       delete input.id;
       const v: number[] = [];
       const args: any[] = [];
