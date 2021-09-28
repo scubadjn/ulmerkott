@@ -15,7 +15,10 @@ import { crudFactory, settings, sql, SQLStringFilter, SQLBoolFilter } from 'ulme
 
 const crud = crudFactory(settings({
   namespace: 'ulmerkott',
-  createId: master.createID,
+  createId: someFunction.createID,
+  logQueries: (query, values) => {
+    console.log(query, values);
+  },
   db: (ctx: Ctx) => ctx.pg.somePgClient,
 }));
 ```

@@ -37,6 +37,13 @@ describe('sql parser', () => {
       fields: 'id,title,my_description',
     });
   });
+  test('insert', () => {
+    expect(parser.insert({ myDescription: 'world', title: 'hello' })).toEqual({
+      vars: '$2,$3',
+      args: ['world', 'hello'],
+      fields: 'id,my_description,title',
+    });
+  });
   test('insert-overrideid', () => {
     expect(parser.insert({ id: 'some-id', title: 'hello', myDescription: 'world' })).toEqual({
       vars: '$2,$3',

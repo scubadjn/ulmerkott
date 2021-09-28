@@ -45,6 +45,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
       if (!obj) return null;
       return obj;
     } catch (e) {
+      if (config.logQueries) config.logQueries(text, values);
       throw err('findOne', e);
     }
   }
@@ -54,6 +55,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
       const { rows } = await db(ctx)({ text, values });
       return rows;
     } catch (e) {
+      if (config.logQueries) config.logQueries(text, values);
       throw err('listAll', e);
     }
   }
@@ -63,6 +65,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
       const { rows: [obj] } = await db<{ count: number }>(ctx)({ text, values });
       return obj.count;
     } catch (e) {
+      if (config.logQueries) config.logQueries(text, values);
       throw err('count', e);
     }
   }
@@ -78,6 +81,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
       if (!obj) throw err('insertOne - no result');
       return obj;
     } catch (e) {
+      if (config.logQueries) config.logQueries(text, values);
       throw err('insertOne', e);
     }
   }
@@ -88,6 +92,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
       if (!obj) throw err('updateOne - not updated');
       return obj;
     } catch (e) {
+      if (config.logQueries) config.logQueries(text, values);
       throw err('updateOne', e);
     }
   }
@@ -99,6 +104,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
       if (!obj) throw err('deleteOne - no result');
       return obj;
     } catch (e) {
+      if (config.logQueries) config.logQueries(text, values);
       throw err('deleteOne', e);
     }
   }
@@ -110,6 +116,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
       await db(ctx)({ text, values });
       return true;
     } catch (e) {
+      if (config.logQueries) config.logQueries(text, values);
       throw err('deleteMany', e);
     }
   }
@@ -120,6 +127,7 @@ export function pgEngine<Columns, DataObj, Create, Update, ListInput = undefined
         const { rows } = await db(ctx)({ text, values });
         return rows;
       } catch (e) {
+        if (config.logQueries) config.logQueries(text, values);
         throw err('loadById', e);
       }
     });

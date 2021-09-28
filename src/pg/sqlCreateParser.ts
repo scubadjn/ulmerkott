@@ -44,10 +44,8 @@ export default function sqlCreateParser(props: Props) {
       const v: number[] = [];
       const args: any[] = [];
       const f: string[] = [];
-      Object.keys(props.fieldMap).forEach((key) => {
-        f.push(props.fieldMap[key]);
-      });
       Object.keys(input).forEach((key, index) => {
+        f.push(props.fieldMap[key]);
         args.push(input[key]);
         v.push(index + 1);
       });

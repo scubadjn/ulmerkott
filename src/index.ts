@@ -2,6 +2,7 @@ import { Client } from 'pg';
 
 export interface UlmerkottConfig<C> {
   namespace: string;
+  logQueries?: (sqlQuery: string, args: any[]) =>  void;
   createId: () => string;
   db: (ctx: C) => Client;
 
